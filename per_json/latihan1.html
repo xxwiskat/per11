@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 1 JSON</title>
+    <style>
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <form class="w-50">
+        <h1>Format Form</h1>
+        <div class="mb-3">
+          <label for="txNIM" class="form-label">NIM</label>
+          <input type="text" class="form-control" id="txNIM" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="txNAMA" class="form-label">NAMA</label>
+          <input type="text" class="form-control" id="txNAMA">
+        </div>
+        <div class="mb-3">
+          <label for="txJKEL" class="form-label">JENIS KELAMIN</label>
+          <input type="text" class="form-control" id="txJKEL">
+        </div>
+        <div class="mb-3">
+          <label for="txALAMAT" class="form-label">ALAMAT</label>
+          <input type="text" class="form-control" id="txALAMAT">
+        </div>
+        <div class="mb-3">
+          <label for="txINSTITUSI" class="form-label">INSTITUSI</label>
+          <input type="text" class="form-control" id="txINSTITUSI">
+        </div>
+        <div class="mb-3">
+          <label for="txJURUSAN" class="form-label">JURUSAN</label>
+          <input type="text" class="form-control" id="txJURUSAN">
+        </div>
+        <div class="mb-3">
+          <label for="txKENDARAAN" class="form-label">KENDARAAN</label>
+          <input type="text" class="form-control" id="txKENDARAAN">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <script>
+        const bacaData= new XMLHttpRequest();
+        bacaData.open("GET", "http://localhost/per_json/latihan1.php");
+        bacaData.send();
+        bacaData.onload= function(){
+            const data= JSON.parse(this.responseText);
+
+            let jkel= (data.JKEL == 'L') ? 'Laki-laki' : 'Perempuan';
+            console.log(data)
+
+            document.getElementById("txNIM").value= data.NIM;
+            document.getElementById("txNAMA").value= data.NAMA;
+            document.getElementById("txJKEL").value= jkel;
+            document.getElementById("txALAMAT").value= data.ALAMAT;
+            document.getElementById("txINSTITUSI").value= data.INSTITUSI;
+            document.getElementById("txJURUSAN").value= data.JURUSAN;
+            document.getElementById("txKENDARAAN").value= data.KENDARAAN;
+        };
+      </script>
+</body>
+</html>
